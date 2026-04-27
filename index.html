@@ -1,0 +1,1113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Afreen Irfan — Digital Marketing Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0d0d0d;
+    --paper: #f5f0e8;
+    --cream: #ede8dc;
+    --rust: #c4622d;
+    --gold: #b89a5a;
+    --muted: #7a7060;
+    --white: #faf8f4;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* ── CURSOR ── */
+  body { cursor: none; }
+  .cursor {
+    width: 10px; height: 10px;
+    background: var(--rust);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.15s ease, width 0.2s, height 0.2s;
+    transform: translate(-50%, -50%);
+  }
+  .cursor-ring {
+    width: 36px; height: 36px;
+    border: 1px solid var(--rust);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: left 0.12s ease, top 0.12s ease, width 0.2s, height 0.2s;
+  }
+  a:hover ~ .cursor, button:hover ~ .cursor { transform: translate(-50%, -50%) scale(2.5); }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.4rem 4rem;
+    background: var(--paper);
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+  }
+  .nav-logo {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink);
+    text-decoration: none;
+    position: relative;
+  }
+  .nav-links a::after {
+    content: ''; position: absolute; bottom: -2px; left: 0;
+    width: 0; height: 1px; background: var(--rust);
+    transition: width 0.3s ease;
+  }
+  .nav-links a:hover::after { width: 100%; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 80px;
+    overflow: hidden;
+  }
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 5rem 4rem 5rem 4rem;
+    position: relative;
+  }
+  .hero-eyebrow {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 2rem;
+    display: flex; align-items: center; gap: 1rem;
+  }
+  .hero-eyebrow::before {
+    content: ''; width: 40px; height: 1px; background: var(--rust);
+  }
+  .hero-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.5rem, 6vw, 6rem);
+    font-weight: 300;
+    line-height: 1.02;
+    letter-spacing: -0.01em;
+    margin-bottom: 0.3rem;
+  }
+  .hero-name em {
+    font-style: italic;
+    color: var(--rust);
+  }
+  .hero-tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1rem, 1.5vw, 1.3rem);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--muted);
+    margin: 1.8rem 0 3rem;
+    line-height: 1.6;
+    max-width: 380px;
+  }
+  .hero-cta-row { display: flex; gap: 1.2rem; align-items: center; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 0.85rem 2rem;
+    text-decoration: none;
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: background 0.25s, color 0.25s;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: var(--rust); }
+  .btn-ghost {
+    border: 1px solid var(--ink);
+    color: var(--ink);
+    padding: 0.85rem 2rem;
+    text-decoration: none;
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: all 0.25s;
+    display: inline-block;
+  }
+  .btn-ghost:hover { border-color: var(--rust); color: var(--rust); }
+
+  .hero-right {
+    background: var(--cream);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-visual {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem;
+    position: relative;
+  }
+  .hero-card {
+    background: var(--white);
+    padding: 3rem 2.5rem;
+    max-width: 380px;
+    position: relative;
+    box-shadow: 20px 20px 0px var(--rust);
+    animation: floatCard 4s ease-in-out infinite;
+  }
+  @keyframes floatCard {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+  .hero-card-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 1.5rem;
+  }
+  .hero-card-stat {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.4rem;
+    padding-bottom: 1.4rem;
+    border-bottom: 1px solid var(--cream);
+  }
+  .hero-card-stat:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.8rem;
+    font-weight: 300;
+    color: var(--ink);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.75rem;
+    color: var(--muted);
+    margin-top: 0.3rem;
+    letter-spacing: 0.05em;
+  }
+  .deco-line {
+    position: absolute;
+    width: 200px; height: 1px;
+    background: var(--gold);
+    opacity: 0.4;
+  }
+  .deco-line-1 { top: 20%; right: -50px; transform: rotate(-15deg); }
+  .deco-line-2 { bottom: 30%; left: -30px; transform: rotate(20deg); }
+
+  /* ── MARQUEE ── */
+  .marquee-strip {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 1rem 0;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .marquee-track {
+    display: inline-block;
+    animation: marquee 20s linear infinite;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+  }
+  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  .marquee-item { display: inline-block; margin: 0 2rem; }
+  .marquee-dot { color: var(--rust); margin: 0 0.5rem; }
+
+  /* ── ABOUT ── */
+  #about {
+    padding: 8rem 4rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 6rem;
+    align-items: start;
+  }
+  .section-index {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    color: var(--rust);
+    text-transform: uppercase;
+    position: sticky;
+    top: 120px;
+  }
+  .section-index span {
+    display: block;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 5rem;
+    font-weight: 300;
+    color: var(--cream);
+    line-height: 1;
+    margin-top: 0.5rem;
+  }
+  .about-content h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 3.5vw, 3.2rem);
+    font-weight: 300;
+    line-height: 1.2;
+    margin-bottom: 2rem;
+  }
+  .about-content h2 em { font-style: italic; color: var(--rust); }
+  .about-content p {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: #3a3530;
+    margin-bottom: 1.5rem;
+  }
+  .about-pills {
+    display: flex; flex-wrap: wrap; gap: 0.6rem;
+    margin-top: 2.5rem;
+  }
+  .pill {
+    border: 1px solid rgba(0,0,0,0.2);
+    padding: 0.4rem 1rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    text-transform: uppercase;
+    transition: all 0.2s;
+  }
+  .pill:hover { border-color: var(--rust); color: var(--rust); }
+
+  /* ── SKILLS ── */
+  #skills {
+    background: var(--cream);
+    padding: 8rem 4rem;
+  }
+  .skills-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .section-header {
+    display: flex; align-items: baseline; gap: 2rem;
+    margin-bottom: 5rem;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 4vw, 4rem);
+    font-weight: 300;
+  }
+  .section-title em { font-style: italic; color: var(--rust); }
+  .section-line {
+    flex: 1;
+    height: 1px;
+    background: rgba(0,0,0,0.12);
+    margin-bottom: 0.5rem;
+  }
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+  .skill-card {
+    background: var(--white);
+    padding: 2.5rem 2rem;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+  }
+  .skill-card:hover { transform: translateY(-4px); }
+  .skill-card::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 0; height: 2px;
+    background: var(--rust);
+    transition: width 0.4s ease;
+  }
+  .skill-card:hover::before { width: 100%; }
+  .skill-icon {
+    font-size: 1.5rem;
+    margin-bottom: 1.2rem;
+    display: block;
+  }
+  .skill-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 400;
+    margin-bottom: 0.8rem;
+  }
+  .skill-desc {
+    font-size: 0.82rem;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+  .skill-tags {
+    margin-top: 1.2rem;
+    display: flex; flex-wrap: wrap; gap: 0.4rem;
+  }
+  .skill-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    color: var(--rust);
+    text-transform: uppercase;
+  }
+  .skill-tag::before { content: '#'; }
+
+  /* ── EXPERIENCE ── */
+  #experience {
+    padding: 8rem 4rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .exp-list { margin-top: 4rem; }
+  .exp-item {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 3rem;
+    padding: 3rem 0;
+    border-top: 1px solid rgba(0,0,0,0.1);
+    position: relative;
+    transition: opacity 0.3s;
+  }
+  .exp-item:last-child { border-bottom: 1px solid rgba(0,0,0,0.1); }
+  .exp-meta { padding-top: 0.3rem; }
+  .exp-year {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--rust);
+    letter-spacing: 0.1em;
+    margin-bottom: 0.5rem;
+  }
+  .exp-company {
+    font-size: 0.78rem;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+  .exp-role {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    font-weight: 300;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+  .exp-desc {
+    font-size: 0.88rem;
+    color: #3a3530;
+    line-height: 1.8;
+    max-width: 600px;
+  }
+  .exp-highlights {
+    margin-top: 1rem;
+    display: flex; flex-wrap: wrap; gap: 0.5rem;
+  }
+  .exp-tag {
+    background: var(--cream);
+    padding: 0.3rem 0.8rem;
+    font-size: 0.7rem;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+  }
+
+  /* ── PROJECTS ── */
+  #projects {
+    background: var(--ink);
+    padding: 8rem 4rem;
+    color: var(--paper);
+  }
+  .projects-inner { max-width: 1200px; margin: 0 auto; }
+  #projects .section-title { color: var(--paper); }
+  #projects .section-line { background: rgba(255,255,255,0.12); }
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2px;
+    margin-top: 4rem;
+  }
+  .project-card {
+    background: #1a1814;
+    padding: 3rem;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+  .project-card:hover { background: #222018; }
+  .project-card::after {
+    content: '↗';
+    position: absolute;
+    top: 2rem; right: 2rem;
+    font-size: 1.2rem;
+    color: var(--rust);
+    opacity: 0;
+    transition: opacity 0.2s, transform 0.2s;
+    transform: translate(-4px, 4px);
+  }
+  .project-card:hover::after { opacity: 1; transform: translate(0, 0); }
+  .project-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--rust);
+    letter-spacing: 0.2em;
+    margin-bottom: 2rem;
+  }
+  .project-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.9rem;
+    font-weight: 300;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+    color: var(--white);
+  }
+  .project-desc {
+    font-size: 0.83rem;
+    color: rgba(245,240,232,0.55);
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+  }
+  .project-tools {
+    display: flex; flex-wrap: wrap; gap: 0.5rem;
+  }
+  .project-tool {
+    border: 1px solid rgba(196,98,45,0.3);
+    padding: 0.25rem 0.7rem;
+    font-size: 0.65rem;
+    color: var(--rust);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* ── WORK SAMPLES ── */
+  #work {
+    padding: 8rem 4rem;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  .work-intro {
+    max-width: 600px;
+    margin-bottom: 4rem;
+  }
+  .work-intro p {
+    font-size: 0.88rem;
+    color: var(--muted);
+    line-height: 1.8;
+    margin-top: 1rem;
+  }
+  .work-gallery {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+  }
+  .work-item {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 4/5;
+    background: var(--cream);
+    cursor: pointer;
+  }
+  .work-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+  .work-item:hover img { transform: scale(1.05); }
+  .work-item-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(13,13,13,0.75);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 1.5rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  .work-item:hover .work-item-overlay { opacity: 1; }
+  .work-item-brand {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--rust);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+  }
+  .work-item-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    color: var(--white);
+    line-height: 1.3;
+  }
+  .work-item.tall { grid-row: span 2; aspect-ratio: auto; min-height: 400px; }
+
+  /* ── CONTACT ── */
+  #contact {
+    background: var(--cream);
+    padding: 8rem 4rem;
+  }
+  .contact-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+  }
+  .contact-left h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 4vw, 4.5rem);
+    font-weight: 300;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+  }
+  .contact-left h2 em { font-style: italic; color: var(--rust); }
+  .contact-left p {
+    font-size: 0.88rem;
+    color: var(--muted);
+    line-height: 1.8;
+    max-width: 400px;
+  }
+  .contact-links { display: flex; flex-direction: column; gap: 1.5rem; }
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    text-decoration: none;
+    color: var(--ink);
+    padding: 1.5rem 2rem;
+    background: var(--white);
+    transition: all 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+  .contact-link::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 0;
+    background: var(--rust);
+    transition: width 0.3s ease;
+  }
+  .contact-link:hover::before { width: 4px; }
+  .contact-link:hover { transform: translateX(4px); }
+  .contact-link-icon { font-size: 1.2rem; position: relative; z-index: 1; }
+  .contact-link-text { position: relative; z-index: 1; }
+  .contact-link-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--rust);
+    display: block;
+    margin-bottom: 0.2rem;
+    font-family: 'Space Mono', monospace;
+  }
+  .contact-link-value {
+    font-size: 0.85rem;
+    color: var(--ink);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink);
+    color: rgba(245,240,232,0.4);
+    padding: 2rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.7rem;
+    font-family: 'Space Mono', monospace;
+    letter-spacing: 0.08em;
+  }
+  footer span { color: var(--rust); }
+
+  /* ── ANIMATIONS ── */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 1.2rem 2rem; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { display: none; }
+    .hero-left { padding: 4rem 2rem; }
+    #about { grid-template-columns: 1fr; gap: 2rem; padding: 5rem 2rem; }
+    .section-index { position: static; }
+    #skills { padding: 5rem 2rem; }
+    .skills-grid { grid-template-columns: 1fr; }
+    #experience { padding: 5rem 2rem; }
+    .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
+    #projects { padding: 5rem 2rem; }
+    .projects-grid { grid-template-columns: 1fr; }
+    #work { padding: 5rem 2rem; }
+    .work-gallery { grid-template-columns: repeat(2, 1fr); }
+    #contact { padding: 5rem 2rem; }
+    .contact-inner { grid-template-columns: 1fr; gap: 3rem; }
+    footer { flex-direction: column; gap: 0.5rem; text-align: center; padding: 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Afreen Irfan</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Digital Marketer · Kerala, India</div>
+    <h1 class="hero-name">
+      Afreen<br><em>Irfan</em>
+    </h1>
+    <p class="hero-tagline">Turning brands into stories,<br>clicks into communities.</p>
+    <div class="hero-cta-row">
+      <a href="#work" class="btn-primary">View My Work</a>
+      <a href="#contact" class="btn-ghost">Let's Connect</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-visual">
+      <div class="deco-line deco-line-1"></div>
+      <div class="deco-line deco-line-2"></div>
+      <div class="hero-card">
+        <div class="hero-card-label">// what I bring to the table</div>
+        <div class="hero-card-stat">
+          <span class="stat-num">3+</span>
+          <span class="stat-label">Brands worked across — IHMS, Spiceland, Yokomet</span>
+        </div>
+        <div class="hero-card-stat">
+          <span class="stat-num">∞</span>
+          <span class="stat-label">Story-first content — every post has a why</span>
+        </div>
+        <div class="hero-card-stat">
+          <span class="stat-num">01</span>
+          <span class="stat-label">Goal — make your brand impossible to ignore</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-strip">
+  <div class="marquee-track">
+    <span class="marquee-item">Social Media Marketing <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Content Strategy <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Brand Storytelling <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Canva Design <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Instagram Growth <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Copy that Converts <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Market Research <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Consumer Behavior <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Social Media Marketing <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Content Strategy <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Brand Storytelling <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Canva Design <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Instagram Growth <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Copy that Converts <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Market Research <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Consumer Behavior <span class="marquee-dot">✦</span></span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-index">
+    <div>01 / About</div>
+    <span>I</span>
+  </div>
+  <div class="about-content fade-up">
+    <h2>Marketing is not<br>a <em>megaphone.</em><br>It's a conversation.</h2>
+    <p>I'm Afreen — a Digital Marketing Assistant at Yokomet, a creative agency startup in Kerala. With a BCom and PGDM background, I bring both the analytical rigour of a researcher and the creative instinct of a storyteller.</p>
+    <p>My work spans social media strategy, content creation, brand design, and consumer behaviour research. I believe the best marketing doesn't feel like marketing — it feels like something worth sharing.</p>
+    <p>Whether it's a scroll-stopping Instagram post or a data-backed dissertation on impulse buying, I approach every brief with the same question: <em>what makes this human?</em></p>
+    <div class="about-pills">
+      <span class="pill">BCom</span>
+      <span class="pill">PGDM</span>
+      <span class="pill">SmartPLS</span>
+      <span class="pill">SPSS</span>
+      <span class="pill">Canva</span>
+      <span class="pill">Meta Ads</span>
+      <span class="pill">Content Calendar</span>
+      <span class="pill">Brand Strategy</span>
+      <span class="pill">Consumer Psychology</span>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="skills-inner">
+    <div class="section-header fade-up">
+      <h2 class="section-title">What I <em>do</em></h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-card fade-up">
+        <span class="skill-icon">✦</span>
+        <div class="skill-name">Social Media Marketing</div>
+        <p class="skill-desc">Building brand presence on Instagram and beyond — from content calendars to caption strategy. I craft posts that stop thumbs and start conversations.</p>
+        <div class="skill-tags">
+          <span class="skill-tag">Instagram</span>
+          <span class="skill-tag">ContentCalendar</span>
+          <span class="skill-tag">Reels</span>
+        </div>
+      </div>
+      <div class="skill-card fade-up">
+        <span class="skill-icon">◈</span>
+        <div class="skill-name">Content Creation & Design</div>
+        <p class="skill-desc">Visual storytelling using Canva, AI tools, and a strong sense of brand aesthetics. From ad creatives to mascot design — I make brands look the part.</p>
+        <div class="skill-tags">
+          <span class="skill-tag">Canva</span>
+          <span class="skill-tag">ChatGPT</span>
+          <span class="skill-tag">Gemini</span>
+        </div>
+      </div>
+      <div class="skill-card fade-up">
+        <span class="skill-icon">◎</span>
+        <div class="skill-name">Brand Copywriting</div>
+        <p class="skill-desc">Words that work — short-form copy, hooks, headlines, and CTAs that drive action. I write with the brand voice, not around it.</p>
+        <div class="skill-tags">
+          <span class="skill-tag">Copywriting</span>
+          <span class="skill-tag">Hooks</span>
+          <span class="skill-tag">CTAs</span>
+        </div>
+      </div>
+      <div class="skill-card fade-up">
+        <span class="skill-icon">▣</span>
+        <div class="skill-name">Market Research & Analytics</div>
+        <p class="skill-desc">Consumer behaviour, data analysis using SPSS and SmartPLS, and turning research into actionable marketing insights.</p>
+        <div class="skill-tags">
+          <span class="skill-tag">SPSS</span>
+          <span class="skill-tag">SmartPLS</span>
+          <span class="skill-tag">Survey Design</span>
+        </div>
+      </div>
+      <div class="skill-card fade-up">
+        <span class="skill-icon">⬡</span>
+        <div class="skill-name">Digital Advertising</div>
+        <p class="skill-desc">Understanding paid ad mechanics, audience targeting, and creative strategy for social media campaigns that generate results.</p>
+        <div class="skill-tags">
+          <span class="skill-tag">Meta Ads</span>
+          <span class="skill-tag">Targeting</span>
+          <span class="skill-tag">Performance</span>
+        </div>
+      </div>
+      <div class="skill-card fade-up">
+        <span class="skill-icon">◐</span>
+        <div class="skill-name">E-Commerce & Sustainable Marketing</div>
+        <p class="skill-desc">Deep interest in how online experiences drive buying behaviour — backed by a full research dissertation and a sustainable fashion retail concept.</p>
+        <div class="skill-tags">
+          <span class="skill-tag">ECommerce</span>
+          <span class="skill-tag">SustainableFashion</span>
+          <span class="skill-tag">UX</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-header fade-up">
+    <h2 class="section-title">Where I've <em>been</em></h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="exp-list">
+    <div class="exp-item fade-up">
+      <div class="exp-meta">
+        <div class="exp-year">2024 – Present</div>
+        <div class="exp-company">Yokomet<br>Creative Agency Startup<br>Kerala</div>
+      </div>
+      <div class="exp-detail">
+        <div class="exp-role">Digital Marketing Assistant</div>
+        <p class="exp-desc">Building Yokomet's Instagram presence from the ground up — developing content strategy, managing the content calendar, writing captions, and creating visual assets. Every post is purposeful, on-brand, and built to grow.</p>
+        <div class="exp-highlights">
+          <span class="exp-tag">Instagram Strategy</span>
+          <span class="exp-tag">Content Calendar</span>
+          <span class="exp-tag">Brand Voice</span>
+          <span class="exp-tag">Creative Direction</span>
+        </div>
+      </div>
+    </div>
+    <div class="exp-item fade-up">
+      <div class="exp-meta">
+        <div class="exp-year">2024</div>
+        <div class="exp-company">Birla Opus<br>Institutional Sales<br>Kerala</div>
+      </div>
+      <div class="exp-detail">
+        <div class="exp-role">Institutional Sales Management Trainee</div>
+        <p class="exp-desc">Focused on government accounts and institutional sales strategy at Birla Opus Prime. Built client relationships, understood B2B marketing dynamics, and gained hands-on sales experience in a large-scale corporate environment.</p>
+        <div class="exp-highlights">
+          <span class="exp-tag">B2B Sales</span>
+          <span class="exp-tag">Government Accounts</span>
+          <span class="exp-tag">Client Relations</span>
+        </div>
+      </div>
+    </div>
+    <div class="exp-item fade-up">
+      <div class="exp-meta">
+        <div class="exp-year">Apr – Jun 2024</div>
+        <div class="exp-company">Arvind Fashion Pvt Ltd<br>USPA Internship<br>India</div>
+      </div>
+      <div class="exp-detail">
+        <div class="exp-role">Marketing Intern — Customer Preference Study</div>
+        <p class="exp-desc">Conducted primary research on customer preference and trial room etiquette at US Polo Assn. outlets. Gathered consumer insights that directly informed in-store experience improvements.</p>
+        <div class="exp-highlights">
+          <span class="exp-tag">Consumer Research</span>
+          <span class="exp-tag">Retail Marketing</span>
+          <span class="exp-tag">Fashion Industry</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="projects-inner">
+    <div class="section-header fade-up">
+      <h2 class="section-title" style="color:var(--white);">What I've <em>built</em></h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="projects-grid">
+      <div class="project-card fade-up">
+        <div class="project-num">Project / 01</div>
+        <div class="project-name">Online Shopping & Impulsive Buying — Dissertation</div>
+        <p class="project-desc">A research study on how online shopping experience drives impulse purchases across top e-commerce platforms. Used SmartPLS and SPSS to analyse interactivity, visual engagement, ease of navigation, and attitudinal loyalty among urban and semi-urban Kerala consumers.</p>
+        <div class="project-tools">
+          <span class="project-tool">SmartPLS</span>
+          <span class="project-tool">SPSS</span>
+          <span class="project-tool">Survey Research</span>
+          <span class="project-tool">Consumer Behaviour</span>
+        </div>
+      </div>
+      <div class="project-card fade-up">
+        <div class="project-num">Project / 02</div>
+        <div class="project-name">Yokomet Instagram — Social Media Strategy</div>
+        <p class="project-desc">Designed and executed Yokomet's Instagram content strategy from scratch — building the brand voice, creating a content calendar, writing copy, and producing visual assets that reflect the agency's creative identity.</p>
+        <div class="project-tools">
+          <span class="project-tool">Instagram</span>
+          <span class="project-tool">Canva</span>
+          <span class="project-tool">Content Strategy</span>
+          <span class="project-tool">Copywriting</span>
+        </div>
+      </div>
+      <div class="project-card fade-up">
+        <div class="project-num">Project / 03</div>
+        <div class="project-name">Coolpex IHMS — Brand Mascot & Ad Creatives</div>
+        <p class="project-desc">Designed Coolpex — a pearl-white ethereal guardian mascot with an airflow cape, glowing green chest core, and IHMS shield. Also created a full series of high-impact social media ads for the Kuwait-based indoor air quality brand.</p>
+        <div class="project-tools">
+          <span class="project-tool">Mascot Design</span>
+          <span class="project-tool">Ad Creative</span>
+          <span class="project-tool">Canva</span>
+          <span class="project-tool">Brand Identity</span>
+        </div>
+      </div>
+      <div class="project-card fade-up">
+        <div class="project-num">Project / 04</div>
+        <div class="project-name">EcoFashion Hub — Sustainable Digital Retail Concept</div>
+        <p class="project-desc">Conceptualised a digital retail platform focused on sustainable fashion — combining e-commerce UX thinking, ethical brand positioning, and digital marketing strategy into a cohesive business concept.</p>
+        <div class="project-tools">
+          <span class="project-tool">Sustainable Fashion</span>
+          <span class="project-tool">E-Commerce</span>
+          <span class="project-tool">Brand Strategy</span>
+          <span class="project-tool">Digital Retail</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WORK SAMPLES -->
+<section id="work">
+  <div class="work-intro fade-up">
+    <div class="section-header">
+      <h2 class="section-title">Work <em>Samples</em></h2>
+      <div class="section-line"></div>
+    </div>
+    <p>A selection of social media creatives, ad campaigns, and brand visuals created across multiple client brands — each built to tell a story and drive action.</p>
+  </div>
+  <div class="work-gallery">
+    <div class="work-item tall fade-up">
+      <img src="assets/img1.png" alt="Coolpex IHMS - AC Air Quality Ad" loading="lazy">
+      <div class="work-item-overlay">
+        <div class="work-item-brand">Coolpex IHMS</div>
+        <div class="work-item-title">Your AC Does More Than Cool Your Home</div>
+      </div>
+    </div>
+    <div class="work-item fade-up">
+      <img src="assets/img2.png" alt="Spiceland Kerala Travel" loading="lazy">
+      <div class="work-item-overlay">
+        <div class="work-item-brand">Spiceland</div>
+        <div class="work-item-title">Plan Your Dream Getaway to Kerala</div>
+      </div>
+    </div>
+    <div class="work-item fade-up">
+      <img src="assets/img3.png" alt="Anti Ageing Lab" loading="lazy">
+      <div class="work-item-overlay">
+        <div class="work-item-brand">Anti Ageing Lab</div>
+        <div class="work-item-title">Age. Redefined.</div>
+      </div>
+    </div>
+    <div class="work-item fade-up">
+      <img src="assets/img4.jpg" alt="Coolpex IHMS - Dry Throat" loading="lazy">
+      <div class="work-item-overlay">
+        <div class="work-item-brand">Coolpex IHMS</div>
+        <div class="work-item-title">Ever Wondered Why Your Throat Feels Dry Every Morning?</div>
+      </div>
+    </div>
+    <div class="work-item fade-up">
+      <img src="assets/img5.png" alt="Coolpex IHMS - Child Sleep" loading="lazy">
+      <div class="work-item-overlay">
+        <div class="work-item-brand">Coolpex IHMS</div>
+        <div class="work-item-title">It's 11:40 PM. Your Child Can't Sleep.</div>
+      </div>
+    </div>
+    <div class="work-item tall fade-up">
+      <img src="assets/img6.png" alt="Coolpex - You Cleaned Everything" loading="lazy">
+      <div class="work-item-overlay">
+        <div class="work-item-brand">Coolpex IHMS</div>
+        <div class="work-item-title">You Cleaned Everything. Except What You Breathe.</div>
+      </div>
+    </div>
+    <div class="work-item fade-up">
+      <img src="assets/img7.png" alt="Yokomet Craft" loading="lazy">
+      <div class="work-item-overlay">
+        <div class="work-item-brand">Yokomet</div>
+        <div class="work-item-title">Craft — Shaping Ideas into Reality</div>
+      </div>
+    </div>
+    <div class="work-item fade-up">
+      <img src="assets/img8.png" alt="Anti Ageing Lab - Look Closer" loading="lazy">
+      <div class="work-item-overlay">
+        <div class="work-item-brand">Anti Ageing Lab</div>
+        <div class="work-item-title">Look Closer. Ageing Starts Silently.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="contact-left fade-up">
+      <h2>Let's make<br>something<br><em>worth remembering.</em></h2>
+      <p>Open to full-time digital marketing roles, freelance projects, and creative collaborations. If you're building a brand that deserves to be seen — let's talk.</p>
+    </div>
+    <div class="contact-links fade-up">
+      <a href="mailto:afreenirfan31@gmail.com" class="contact-link">
+        <span class="contact-link-icon">✉</span>
+        <span class="contact-link-text">
+          <span class="contact-link-label">Email</span>
+          <span class="contact-link-value">afreenirfan31@gmail.com</span>
+        </span>
+      </a>
+      <a href="https://www.linkedin.com/in/afreen-irfan-048a4a27a/" target="_blank" class="contact-link">
+        <span class="contact-link-icon">◈</span>
+        <span class="contact-link-text">
+          <span class="contact-link-label">LinkedIn</span>
+          <span class="contact-link-value">linkedin.com/in/afreen-irfan</span>
+        </span>
+      </a>
+      <a href="https://github.com/AfreenIrfan" target="_blank" class="contact-link">
+        <span class="contact-link-icon">◎</span>
+        <span class="contact-link-text">
+          <span class="contact-link-label">GitHub</span>
+          <span class="contact-link-value">github.com/AfreenIrfan</span>
+        </span>
+      </a>
+      <a href="https://drive.google.com/drive/u/0/folders/1Lze1-HjlaLcnOM8E0vVWsw_cm32WpH75" target="_blank" class="contact-link">
+        <span class="contact-link-icon">▣</span>
+        <span class="contact-link-text">
+          <span class="contact-link-label">Resume & AI Video</span>
+          <span class="contact-link-value">View on Google Drive</span>
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>© 2025 Afreen Irfan — All Rights Reserved</div>
+  <div>Built with <span>✦</span> intention · Kerala, India</div>
+</footer>
+
+<script>
+  // Custom cursor
+  const cursor = document.getElementById('cursor');
+  const cursorRing = document.getElementById('cursorRing');
+  document.addEventListener('mousemove', e => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
+    cursorRing.style.left = e.clientX + 'px';
+    cursorRing.style.top = e.clientY + 'px';
+  });
+  document.querySelectorAll('a, button').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cursor.style.transform = 'translate(-50%, -50%) scale(2)';
+      cursorRing.style.transform = 'translate(-50%, -50%) scale(1.5)';
+    });
+    el.addEventListener('mouseleave', () => {
+      cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+      cursorRing.style.transform = 'translate(-50%, -50%) scale(1)';
+    });
+  });
+
+  // Scroll animations
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
